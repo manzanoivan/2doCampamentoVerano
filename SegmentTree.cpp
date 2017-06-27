@@ -4,11 +4,13 @@ using namespace std;
 const int INF = INT_MAX;
 
 int ST[400000];
+int PosHoja[100002];
 int valores[100002];
 
 void Construye(int InicioRango,int FinRango,int Pos){
 	if(InicioRango == FinRango){
 		ST[Pos] = valores[InicioRango];
+		PosHoja[FinRango] = Pos;
 		return;
 	}
 	int mitad = (InicioRango + FinRango)/2;
@@ -28,6 +30,20 @@ int Query(int IniRango,int FinRango,const int IniQuery, const int FinQuery,int p
 	int izq = Query(IniRango,mitad,IniQuery,FinQuery,pos*2);
 	int der = Query(mitad+1,FinRango,IniQuery,FinQuery,pos*2+1);
 	return min(izq,der);
+}
+
+void Update(int PosArreglo, int x){
+
+	valores[PosArreglo] = x;
+
+	int PosST = PosHoja[PosArreglo];
+	ST[PosST] = x;
+
+	while(PosST != 1){
+		PosST /= 2;
+		ST[PosST] = min(ST[PosST*2],ST[PosST*2+1]);
+	}
+
 }
 
 int main(){
