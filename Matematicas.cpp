@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <cmath>
 using namespace std;
 
 // Criba de Eratostenes de 1 a n.
@@ -11,6 +13,8 @@ vector<int> Criba(int n) {
 			if (!criba[j]) criba[j] = i;
 	return criba;
 }
+
+typedef pair<int, int> Factor;
 
 // Factores primos de n factorial (n!).
 // El vector de primos debe estar ordenado.
